@@ -375,3 +375,4 @@ debug/
 release/
 
 uv.lock
+.lcpr_data/
