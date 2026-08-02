@@ -53,7 +53,9 @@ authors = [
 keywords = [] # 这里可以添加一些关键词，帮助用户搜索到你的项目 
 
 # 运行时依赖（留空，按项目需要添加）
-dependencies = []
+dependencies = [
+    "manim>=0.20.1",
+]
 
 # 可选依赖组（兼容 pip install ".[dev]" 方式安装）
 [project.optional-dependencies]
