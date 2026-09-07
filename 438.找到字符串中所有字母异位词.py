@@ -55,17 +55,35 @@ from typing import List
 
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        s_length = len(s)
-        p_length = len(p)
-        res = []
-        if p_length == 0:
-            return list(range(s_length))
-        for i in range(s_length - p_length + 1):
-            sub_str = s[i : i + p_length]
-            if Counter(sub_str) == Counter(p):
-                res.append(i)
+        """用固定长度窗口查找所有字母异位词。"""
+        sLength = len(s)
+        pLength = len(p)
 
-        return res
+        if pLength > sLength:
+            return []
+
+        targetCount = Counter(p)
+        windowCount = Counter(s[:pLength])
+        result = []
+
+        # 检查第一个窗口
+        if windowCount == targetCount:
+            result.append(0)
+
+        for right in range(pLength, sLength):
+            # 移除旧窗口最左侧的字符
+            leavingChar = s[right - pLength]
+            windowCount[leavingChar] -= 1
+            if windowCount[leavingChar] == 0:
+                del windowCount[leavingChar]
+
+            # 加入新窗口最右侧的字符
+            windowCount[s[right]] += 1
+
+            if windowCount == targetCount:
+                result.append(right - pLength + 1)
+
+        return result
 
 
 # @lc code=end
